@@ -31,38 +31,50 @@ end
 
 
 # phase 1
-# def largest_contiguous_subsum(list) # O(n^2)
+def largest_contiguous_subsum(list) # O(n^2)
+    subarr = []
+    max = list.first # 1
 
-#     max = list.first # 1
+    (0...list.length).each do |i| # n
+        (i...list.length).each do |j| # n
+            subarr << list[i..j]
+        end
+    end
+    
 
-#     (0...list.length).each do |i| # n
-#         (i...list.length).each do |j| # n
-#             subsum = list[i..j].sum # 1
-#             if subsum > max # 1
-#                 max = subsum # 1
-#             end
-#         end
-#     end
-#     max
-# end
+    subarr.each do |nums|
+        sum = 0
+        nums.each do |n|
+            sum += n
+            if sum > max
+                max = sum
+            end
+        end
+    end
+
+    max
+end
 
 
 
 # phase 2 O(n)
-def largest_contiguous_subsum(list)
-  current_sum = 0 # 1
-  largest_sum = list.first # 1
+# def largest_contiguous_subsum(list)
+#   current_sum = 0 # 1
+#   largest_sum = list.first # 1
 
-  list.each do |ele| # n
-    current_sum += ele # 1
-    if current_sum > largest_sum # 1
-        largest_sum = current_sum # 1
-    end
-  end
+#   list.each do |ele| # n
+#     current_sum += ele # 1
+#     if current_sum > largest_sum # 1
+#         largest_sum = current_sum # 1
+#     elsif current_sum < 0
+#         current_sum = 0
+#     end
+    
+#   end
 
-  largest_sum # 1
-end
+#   largest_sum # 1
+# end
 
-list = [5, 3, -7]
+list = [2, 3, -6, 7, -6, 7]
 p largest_contiguous_subsum(list) # => 8
 
